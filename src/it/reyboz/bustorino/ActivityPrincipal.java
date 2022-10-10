@@ -626,6 +626,9 @@ public class ActivityPrincipal extends GeneralActivity implements FragmentListen
                 createShowMainFragment(fraMan, args ,addtobackstack);
                 //probableFragment = createAndShowMainFragment();
             }
+        } else {
+            //the MainScreeFragment is shown, nothing to do
+            probableFragment.requestArrivalsForStopID(ID);
         }
 
         mNavView.setCheckedItem(R.id.nav_arrivals);
