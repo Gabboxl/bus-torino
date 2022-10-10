@@ -233,13 +233,15 @@ public abstract class utils {
      */
     public static List<ArrivalsFetcher> getDefaultArrivalsFetchers(Context context){
         SharedPreferences defSharPref = PreferenceManager.getDefaultSharedPreferences(context);
-        final Set<String> setSelected = defSharPref.getStringSet(SettingsFragment.KEY_ARRIVALS_FETCHERS_USE, new HashSet<>());
+        final Set<String> setSelected = new HashSet<>();
+        setSelected.addAll(defSharPref.getStringSet(SettingsFragment.KEY_ARRIVALS_FETCHERS_USE,
+                new HashSet<>()));
         if (setSelected.isEmpty()) {
             return Arrays.asList(new MatoAPIFetcher(),
                     new GTTJSONFetcher(), new FiveTScraperFetcher());
         }else{
             ArrayList<ArrivalsFetcher> outFetchers = new ArrayList<>(4);
-            for(String s: setSelected){
+            /*for(String s: setSelected){
                 switch (s){
                     case "matofetcher":
                         outFetchers.add(new MatoAPIFetcher());
@@ -256,17 +258,27 @@ public abstract class utils {
                     default:
                         throw  new IllegalArgumentException();
                 }
+            }*/
+            if (setSelected.contains("matofetcher")) {
+                outFetchers.add(new MatoAPIFetcher());
+                setSelected.remove("matofetcher");
             }
-            /*
-            if (setSelected.contains("matofetcher"))
-                        outFetchers.add(new MatoAPIFetcher());
-            if (setSelected.contains("fivetapifetcher"))
+            if (setSelected.contains("fivetapifetcher")) {
                 outFetchers.add(new FiveTAPIFetcher());
-            if (setSelected.contains("gttjsonfetcher"))
+                setSelected.remove("fivetapifetcher");
+            }
+            if (setSelected.contains("gttjsonfetcher")){
                 outFetchers.add(new GTTJSONFetcher());
-            if (setSelected.contains("fivetscraper"))
+                setSelected.remove("gttjsonfetcher");
+            }
+            if (setSelected.contains("fivetscraper")) {
                 outFetchers.add(new FiveTScraperFetcher());
-             */
+                setSelected.remove("fivetscraper");
+            }
+            if(!setSelected.isEmpty()){
+                Log.e("BusTO-Utils","Getting some fetchers values which are not contemplated");
+            }
+
             return outFetchers;
         }
     }
@@ -316,5 +328,15 @@ public abstract class utils {
 
         // Return the converted Set
         return set;
+    }
+
+    public static <T> String giveClassesForArray(T[] array){
+        StringBuilder sb = new StringBuilder();
+        for (T f: array){
+            sb.append("");
+            sb.append(f.getClass().getSimpleName());
+            sb.append("; ");
+        }
+        return sb.toString();
     }
 }

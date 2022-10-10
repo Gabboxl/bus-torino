@@ -283,7 +283,10 @@ public class ArrivalsFragment extends ResultListFragment implements LoaderManage
     }
 
     private void rotateFetchers(){
-        Collections.rotate(fetchers, 1);
+        Log.d(DEBUG_TAG, "Rotating fetchers, before: "+fetchers);
+        Collections.rotate(fetchers, -1);
+        Log.d(DEBUG_TAG, "Rotating fetchers, afterwards: "+fetchers);
+
     }
 
 
