@@ -19,6 +19,7 @@ package it.reyboz.bustorino.backend;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -26,16 +27,21 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import it.reyboz.bustorino.backend.mato.MatoAPIFetcher;
+import it.reyboz.bustorino.fragments.SettingsFragment;
 
 public abstract class utils {
     private static final double EarthRadius = 6371e3;
@@ -213,9 +219,56 @@ public abstract class utils {
         }
     }
 
+    /**
+     * Get the default list of fetchers for arrival times
+     * @return array of ArrivalsFetchers to use
+     */
     public static ArrivalsFetcher[] getDefaultArrivalsFetchers(){
         return  new ArrivalsFetcher[]{  new MatoAPIFetcher(),
-                new FiveTAPIFetcher(), new GTTJSONFetcher(), new FiveTScraperFetcher()};
+                 new GTTJSONFetcher(), new FiveTScraperFetcher()};
+    }
+    /**
+     * Get the default list of fetchers for arrival times
+     * @return array of ArrivalsFetchers to use
+     */
+    public static List<ArrivalsFetcher> getDefaultArrivalsFetchers(Context context){
+        SharedPreferences defSharPref = PreferenceManager.getDefaultSharedPreferences(context);
+        final Set<String> setSelected = defSharPref.getStringSet(SettingsFragment.KEY_ARRIVALS_FETCHERS_USE, new HashSet<>());
+        if (setSelected.isEmpty()) {
+            return Arrays.asList(new MatoAPIFetcher(),
+                    new GTTJSONFetcher(), new FiveTScraperFetcher());
+        }else{
+            ArrayList<ArrivalsFetcher> outFetchers = new ArrayList<>(4);
+            for(String s: setSelected){
+                switch (s){
+                    case "matofetcher":
+                        outFetchers.add(new MatoAPIFetcher());
+                        break;
+                    case "fivetapifetcher":
+                        outFetchers.add(new FiveTAPIFetcher());
+                        break;
+                    case "gttjsonfetcher":
+                        outFetchers.add(new GTTJSONFetcher());
+                        break;
+                    case "fivetscraper":
+                        outFetchers.add(new FiveTScraperFetcher());
+                        break;
+                    default:
+                        throw  new IllegalArgumentException();
+                }
+            }
+            /*
+            if (setSelected.contains("matofetcher"))
+                        outFetchers.add(new MatoAPIFetcher());
+            if (setSelected.contains("fivetapifetcher"))
+                outFetchers.add(new FiveTAPIFetcher());
+            if (setSelected.contains("gttjsonfetcher"))
+                outFetchers.add(new GTTJSONFetcher());
+            if (setSelected.contains("fivetscraper"))
+                outFetchers.add(new FiveTScraperFetcher());
+             */
+            return outFetchers;
+        }
     }
     /**
      * Print the first i lines of the the trace of an exception
@@ -252,5 +305,16 @@ public abstract class utils {
             sb.append(dat.get(i));
         }
         return sb.toString();
+    }
+
+    public static <T> Set<T> convertArrayToSet(T[] array)
+    {
+        // Create an empty Set
+        Set<T> set = new HashSet<>();
+        // Add each element into the set
+        set.addAll(Arrays.asList(array));
+
+        // Return the converted Set
+        return set;
     }
 }

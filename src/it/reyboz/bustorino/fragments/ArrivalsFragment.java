@@ -18,6 +18,7 @@
 package it.reyboz.bustorino.fragments;
 
 
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -85,7 +86,7 @@ public class ArrivalsFragment extends ResultListFragment implements LoaderManage
     protected ImageButton addToFavorites;
     protected TextView timesSourceTextView;
 
-    private List<ArrivalsFetcher> fetchers = new ArrayList<>(Arrays.asList(utils.getDefaultArrivalsFetchers()));
+    private List<ArrivalsFetcher> fetchers = null; //new ArrayList<>(Arrays.asList(utils.getDefaultArrivalsFetchers()));
 
     private boolean reloadOnResume = true;
 
@@ -247,6 +248,14 @@ public class ArrivalsFragment extends ResultListFragment implements LoaderManage
 
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        //get fetchers
+        fetchers = utils.getDefaultArrivalsFetchers(context);
+    }
+
     @Nullable
     public String getStopID() {
         return stopID;
@@ -274,7 +283,7 @@ public class ArrivalsFragment extends ResultListFragment implements LoaderManage
     }
 
     private void rotateFetchers(){
-        Collections.rotate(fetchers, -1);
+        Collections.rotate(fetchers, 1);
     }
 
 
@@ -332,7 +341,7 @@ public class ArrivalsFragment extends ResultListFragment implements LoaderManage
         }
         int count = 0;
         if (source!= Passaggio.Source.UNDETERMINED)
-        while (source != fetchers.get(0).getSourceForFetcher() && count < 100){
+        while (source != fetchers.get(0).getSourceForFetcher() && count < 10){
             //we need to update the fetcher that is requested
             rotateFetchers();
             count++;
@@ -431,9 +440,13 @@ public class ArrivalsFragment extends ResultListFragment implements LoaderManage
             case loaderStopId:
                 if(data.getCount()>0){
                     data.moveToFirst();
-                    stopName = data.getString(data.getColumnIndex(
+                    int index = data.getColumnIndex(
                             NextGenDB.Contract.StopsTable.COL_NAME
-                    ));
+                    );
+                    if (index == -1){
+                        Log.e(DEBUG_TAG, "Index is -1, column not present. App may explode now...");
+                    }
+                    stopName = data.getString(index);
                     updateMessage();
                 } else {
                     Log.w("ArrivalsFragment"+getTag(),"Stop is not inside the database... CLOISTER BELL");

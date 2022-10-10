@@ -41,6 +41,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
 import java.util.Map;
 
 import it.reyboz.bustorino.R;
@@ -107,6 +108,10 @@ public class MainScreenFragment extends ScreenBaseFragment implements  FragmentL
     private final Runnable refreshStop = new Runnable() {
         public void run() {
             if(getContext() == null) return;
+            List<ArrivalsFetcher> fetcherList = utils.getDefaultArrivalsFetchers(getContext());
+            ArrivalsFetcher[] arrivalsFetchers = new ArrivalsFetcher[fetcherList.size()];
+            arrivalsFetchers = fetcherList.toArray(arrivalsFetchers);
+
             if (fragMan.findFragmentById(R.id.resultFrame) instanceof ArrivalsFragment) {
                 ArrivalsFragment fragment = (ArrivalsFragment) fragMan.findFragmentById(R.id.resultFrame);
                 if (fragment == null){
