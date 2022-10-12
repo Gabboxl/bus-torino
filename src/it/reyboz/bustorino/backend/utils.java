@@ -233,8 +233,7 @@ public abstract class utils {
      */
     public static List<ArrivalsFetcher> getDefaultArrivalsFetchers(Context context){
         SharedPreferences defSharPref = PreferenceManager.getDefaultSharedPreferences(context);
-        final Set<String> setSelected = new HashSet<>();
-        setSelected.addAll(defSharPref.getStringSet(SettingsFragment.KEY_ARRIVALS_FETCHERS_USE,
+        final Set<String> setSelected = new HashSet<>(defSharPref.getStringSet(SettingsFragment.KEY_ARRIVALS_FETCHERS_USE,
                 new HashSet<>()));
         if (setSelected.isEmpty()) {
             return Arrays.asList(new MatoAPIFetcher(),
@@ -276,7 +275,7 @@ public abstract class utils {
                 setSelected.remove("fivetscraper");
             }
             if(!setSelected.isEmpty()){
-                Log.e("BusTO-Utils","Getting some fetchers values which are not contemplated");
+                Log.e("BusTO-Utils","Getting some fetchers values which are not contemplated: "+setSelected);
             }
 
             return outFetchers;

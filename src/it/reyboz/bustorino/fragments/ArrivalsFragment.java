@@ -212,6 +212,9 @@ public class ArrivalsFragment extends ResultListFragment implements LoaderManage
         if(stopID!=null){
             //refresh the arrivals
             if(!justCreated){
+                fetchers = utils.getDefaultArrivalsFetchers(getContext());
+                adjustFetchersToSource();
+
                 if (reloadOnResume)
                     mListener.requestArrivalsForStopID(stopID);
             }
@@ -342,14 +345,9 @@ public class ArrivalsFragment extends ResultListFragment implements LoaderManage
             default:
                 throw new IllegalStateException("Unexpected value: " + source);
         }
-        int count = 0;
-        if (source!= Passaggio.Source.UNDETERMINED)
-        while (source != fetchers.get(0).getSourceForFetcher() && count < 10){
-            //we need to update the fetcher that is requested
-            rotateFetchers();
-            count++;
-        }
-        if (count>10)
+        //
+        final boolean updatedFetchers = adjustFetchersToSource(source);
+        if(!updatedFetchers)
             Log.w(DEBUG_TAG, "Tried to update the source fetcher but it didn't work");
         final String base_message = getString(R.string.times_source_fmt, source_txt);
         timesSourceTextView.setText(base_message);
@@ -359,6 +357,26 @@ public class ArrivalsFragment extends ResultListFragment implements LoaderManage
             timesSourceTextView.setVisibility(View.INVISIBLE);
         }
         fetchersChangeRequestPending = false;
+    }
+
+    protected boolean adjustFetchersToSource(Passaggio.Source source){
+        if (source == null) return false;
+        int count = 0;
+        if (source!= Passaggio.Source.UNDETERMINED)
+            while (source != fetchers.get(0).getSourceForFetcher() && count < 200){
+                //we need to update the fetcher that is requested
+                rotateFetchers();
+                count++;
+            }
+        if (count>=200){
+            return false;
+        }
+        else return true;
+    }
+    protected boolean adjustFetchersToSource(){
+        if (lastUpdatedPalina == null) return false;
+        final Passaggio.Source source = lastUpdatedPalina.getPassaggiSourceIfAny();
+        return adjustFetchersToSource(source);
     }
 
     @Override
