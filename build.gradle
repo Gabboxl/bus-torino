@@ -1,13 +1,13 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
         maven { url 'https://maven.google.com' }
         google()
 
     }
 
     ext {
-        androidXTestVersion = "1.4.0"
+        androidXTestVersion = "1.5.2"
 
         //multidex
         multidex_version = "2.0.1"
@@ -19,18 +19,18 @@ buildscript {
         work_version = "2.7.1"
 
         acra_version = "5.7.0"
-        lifecycle_version = "2.4.1"
+        lifecycle_version = "2.5.1"
         arch_version = "2.1.0"
         room_version = "2.4.1"
         //kotlin
-        kotlin_version = '1.6.0'
-        coroutines_version = "1.5.0"
+        kotlin_version = '1.8.0'
+        coroutines_version = '1.6.4'
 
     }
     dependencies {
 
         classpath 'com.android.tools.build:gradle:7.4.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0"
     }
 }
 allprojects {
@@ -135,8 +135,8 @@ android {
         implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
         // Room components
-        implementation "androidx.room:room-ktx:$room_version"
-        kapt "androidx.room:room-compiler:$room_version"
+        implementation "androidx.room:room-ktx:2.5.0"
+        kapt "androidx.room:room-compiler:2.5.0"
         //multidex - we need this to build the app
         implementation "androidx.multidex:multidex:$multidex_version"
 
@@ -145,16 +145,16 @@ android {
         testImplementation 'junit:junit:4.13.2'
         implementation 'junit:junit:4.13.2'
 
-        implementation "androidx.test.ext:junit:1.1.3"
+        implementation "androidx.test.ext:junit:1.1.5"
         implementation "androidx.test:core:$androidXTestVersion"
         implementation "androidx.test:runner:$androidXTestVersion"
-        implementation "androidx.room:room-testing:$room_version"
+        implementation "androidx.room:room-testing:2.5.0"
 
-        androidTestImplementation "androidx.test.ext:junit:1.1.3"
+        androidTestImplementation "androidx.test.ext:junit:1.1.5"
         androidTestImplementation "androidx.test:core:$androidXTestVersion"
         androidTestImplementation "androidx.test:runner:$androidXTestVersion"
         androidTestImplementation "androidx.test:rules:$androidXTestVersion"
-        androidTestImplementation "androidx.room:room-testing:$room_version"
+        androidTestImplementation "androidx.room:room-testing:2.5.0"
 
 
 
@@ -173,7 +173,7 @@ dependencies {
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
 
 }
