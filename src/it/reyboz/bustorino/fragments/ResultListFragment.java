@@ -129,40 +129,33 @@ public class ResultListFragment extends Fragment{
             resultsListView = (ListView) root.findViewById(R.id.resultsListView);
             switch (adapterKind) {
                 case STOPS:
-                    resultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            /*
-                             * Casting because of Javamerda
-                             * @url http://stackoverflow.com/questions/30549485/androids-list-view-parameterized-type-in-adapterview-onitemclicklistener
-                             */
-                            Stop busStop = (Stop) parent.getItemAtPosition(position);
-                            mListener.requestArrivalsForStopID(busStop.ID);
-                        }
+                    resultsListView.setOnItemClickListener((parent, view, position, id) -> {
+                        /*
+                         * Casting because of Javamerda
+                         * @url http://stackoverflow.com/questions/30549485/androids-list-view-parameterized-type-in-adapterview-onitemclicklistener
+                         */
+                        Stop busStop = (Stop) parent.getItemAtPosition(position);
+                        mListener.requestArrivalsForStopID(busStop.ID);
                     });
 
                     // set the textviewMessage
                     setTextViewMessage(getString(R.string.results));
                     break;
                 case ARRIVALS:
-                    resultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            String routeName;
+                    resultsListView.setOnItemClickListener((parent, view, position, id) -> {
+                        String routeName;
 
-                            Route r = (Route) parent.getItemAtPosition(position);
-                            routeName = FiveTNormalizer.routeInternalToDisplay(r.getNameForDisplay());
-                            if (routeName == null) {
-                                routeName = r.getNameForDisplay();
-                            }
-                            if (r.destinazione == null || r.destinazione.length() == 0) {
-                                Toast.makeText(getContext(),
-                                        getString(R.string.route_towards_unknown, routeName), Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getContext(),
-                                        getString(R.string.route_towards_destination, routeName, r.destinazione), Toast.LENGTH_SHORT).show();
-                            }
+                        Route r = (Route) parent.getItemAtPosition(position);
+                        routeName = FiveTNormalizer.routeInternalToDisplay(r.getNameForDisplay());
+                        if (routeName == null) {
+                            routeName = r.getNameForDisplay();
+                        }
+                        if (r.destinazione == null || r.destinazione.length() == 0) {
+                            Toast.makeText(getContext(),
+                                    getString(R.string.route_towards_unknown, routeName), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(),
+                                    getString(R.string.route_towards_destination, routeName, r.destinazione), Toast.LENGTH_SHORT).show();
                         }
                     });
                     String displayName = getArguments().getString(ArrivalsFragment.STOP_TITLE);
