@@ -53,8 +53,8 @@ import it.reyboz.bustorino.util.RouteSorterByArrivalTime;
  * @author Ludovico Pavesi
  */
 public class PalinaAdapter extends ArrayAdapter<Route> implements SharedPreferences.OnSharedPreferenceChangeListener {
-    private LayoutInflater li;
-    private static int row_layout = R.layout.entry_bus_line_passage;
+    private final LayoutInflater li;
+    private static final int row_layout = R.layout.entry_bus_line_passage;
     private static final int metroBg = R.drawable.route_background_metro;
     private static final int busBg = R.drawable.route_background_bus;
     private static final int extraurbanoBg = R.drawable.route_background_bus_long_distance;

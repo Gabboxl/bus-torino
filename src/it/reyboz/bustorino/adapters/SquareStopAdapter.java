@@ -37,7 +37,7 @@ public class SquareStopAdapter extends RecyclerView.Adapter<SquareStopAdapter.Sq
     private final static int layoutRes = R.layout.stop_card;
     //private List<Stop> stops;
     private @Nullable Location userPosition;
-    private FragmentListenerMain listener;
+    private final FragmentListenerMain listener;
     private List<Stop> stops;
 
     public SquareStopAdapter(@Nullable List<Stop> stopList, FragmentListenerMain fragmentListener, @Nullable Location pos) {

@@ -43,12 +43,12 @@ public class ArrivalsStopAdapter extends RecyclerView.Adapter<ArrivalsStopAdapte
     private final static int layoutRes = R.layout.arrivals_nearby_card;
     //private List<Stop> stops;
     private @Nullable Location userPosition;
-    private FragmentListenerMain listener;
+    private final FragmentListenerMain listener;
     private List< Pair<Stop, Route> > routesPairList;
     private final Context context;
     //Maximum number of stops to keep
     private final int MAX_STOPS = 20; //TODO: make it programmable
-    private String KEY_CAPITALIZE;
+    private final String KEY_CAPITALIZE;
     private NameCapitalize capit;
 
 
