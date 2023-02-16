@@ -30,12 +30,21 @@ import org.acra.data.StringFormat;
 
 import static org.acra.ReportField.*;
 
+import com.google.android.material.color.DynamicColors;
+
 
 public class BustoApp extends MultiDexApplication {
     private static final ReportField[] REPORT_FIELDS = {REPORT_ID, APP_VERSION_CODE, APP_VERSION_NAME,
             PACKAGE_NAME, PHONE_MODEL, BRAND, PRODUCT, ANDROID_VERSION, BUILD_CONFIG, CUSTOM_DATA,
             IS_SILENT, STACK_TRACE, INITIAL_CONFIGURATION, CRASH_CONFIGURATION, DISPLAY, USER_COMMENT,
             USER_APP_START_DATE, USER_CRASH_DATE, LOGCAT, SHARED_PREFERENCES};
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        DynamicColors.applyToActivitiesIfAvailable(this);
+    }
 
     @Override
     protected void attachBaseContext(Context base) {
