@@ -17,7 +17,6 @@
  */
 package it.reyboz.bustorino.fragments;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,7 +44,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.reyboz.bustorino.*;
+import it.reyboz.bustorino.BuildConfig;
+import it.reyboz.bustorino.R;
 import it.reyboz.bustorino.adapters.StopAdapterListener;
 import it.reyboz.bustorino.adapters.StopRecyclerAdapter;
 import it.reyboz.bustorino.backend.Stop;
@@ -61,8 +61,6 @@ public class FavoritesFragment extends ScreenBaseFragment {
 
     @Nullable
     private CommonFragmentListener mListener;
-
-    public static final String FRAGMENT_TAG = "BusTOFavFragment";
 
     private final StopAdapterListener adapterListener = new StopAdapterListener() {
         @Override
