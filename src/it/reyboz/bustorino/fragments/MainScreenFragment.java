@@ -310,7 +310,7 @@ public class MainScreenFragment extends ScreenBaseFragment implements  FragmentL
 
         swipeRefreshLayout
                 .setOnRefreshListener(() -> mainHandler.post(refreshStop));
-        swipeRefreshLayout.setColorSchemeResources(R.color.blue_500, R.color.orange_500);
+        //swipeRefreshLayout.setColorSchemeResources(R.color.blue_500, R.color.orange_500);
 
         coordLayout = root.findViewById(R.id.coord_layout);
 

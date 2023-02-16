@@ -40,7 +40,7 @@
         <activity
                 android:name=".ActivityExperiments"
                 android:label="@string/experiments"
-                android:theme="@style/MapTheme">
+                android:theme="@style/AppTheme">
         </activity>
         <activity
                 android:name=".ActivityPrincipal"
@@ -91,7 +91,7 @@
                 android:name=".ActivityAbout"
                 android:label="@string/about"
                 android:parentActivityName=".ActivityPrincipal"
-                android:theme="@style/AboutTheme">
+                android:theme="@style/AppTheme">
 
             <!-- API < 16: -->
             <meta-data

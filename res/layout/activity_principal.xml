@@ -35,8 +35,6 @@
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:headerLayout="@layout/nav_header"
-        app:insetForeground="@color/teal_200"
-        app:itemIconTint="@color/teal_200"
         app:itemTextAppearance="?android:attr/textAppearanceMedium"
         app:itemTextColor="@android:color/white"
         app:menu="@menu/drawer_main" />

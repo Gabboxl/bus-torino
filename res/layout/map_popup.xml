@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:maxWidth="400sp"
-        android:textColor="@color/blue_700"
         android:textSize="16sp" />
 
     <TextView

@@ -28,8 +28,7 @@
         android:layout_alignParentRight="true"
         android:layout_margin="10dp"
         android:text="@string/show_arrivals"
-        android:textColor="@android:color/white"
-        app:backgroundTint="@color/blue_500" />
+        android:textColor="@android:color/white" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -67,9 +66,7 @@
         android:layout_below="@+id/titleTextView"
         android:layout_centerHorizontal="true"
         android:indeterminate="true"
-        android:indeterminateTint="@color/blue_700"
-        android:paddingTop="10dp"
-        android:progressDrawable="@color/blue_700" />
+        android:paddingTop="10dp" />
 
     <TextView
         android:id="@+id/messageTextView"
