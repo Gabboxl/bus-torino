@@ -91,7 +91,7 @@
                 android:name=".ActivityAbout"
                 android:label="@string/about"
                 android:parentActivityName=".ActivityPrincipal"
-                android:theme="@style/AppTheme">
+                android:theme="@style/AppTheme.NoActionBar">
 
             <!-- API < 16: -->
             <meta-data
