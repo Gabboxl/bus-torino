@@ -14,20 +14,20 @@
             android:id="@+id/nav_favorites_item"
             android:icon="@drawable/ic_star_filled_white"
             android:title="@string/nav_favorites_text" />
-        <item android:id="@+id/nav_lines_item"
-              android:icon="@drawable/ic_moving_emph"
-            android:title="@string/lines"
-        />
+        <item
+            android:id="@+id/nav_lines_item"
+            android:icon="@drawable/ic_moving_emph"
+            android:title="@string/lines" />
     </group>
 
-    <item android:id="@+id/drawer_action_settings"
-        android:title="@string/action_settings"
+    <item
+        android:id="@+id/drawer_action_settings"
         android:icon="@drawable/ic_baseline_settings_24"
-        />
+        android:title="@string/action_settings" />
 
-    <item android:id="@+id/drawer_action_info"
-        android:title="@string/action_about"
+    <item
+        android:id="@+id/drawer_action_info"
         android:icon="@drawable/ic_outline_info_24"
-        />
+        android:title="@string/action_about" />
 
 </menu>

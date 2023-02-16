@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
-        <item
-            android:id="@+id/action_about"
-            android:orderInCategory="4"
-            android:title="@string/action_about_more" />
-        <item
-            android:id="@+id/action_hack"
-            android:orderInCategory="6"
-            android:title="@string/action_wiki"
-            app:showAsAction="never" />
-        <item
-            android:id="@+id/action_source"
-            android:orderInCategory="7"
-            android:title="@string/action_source"
-            app:showAsAction="never" />
-        <item
-            android:id="@+id/action_licence"
-            android:orderInCategory="8"
-            android:title="@string/action_licence"
-            app:showAsAction="never" />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-            android:id="@+id/action_experiments"
-            android:title="@string/experiments"
-            android:orderInCategory="10"
-    />
+        android:id="@+id/action_about"
+        android:orderInCategory="4"
+        android:title="@string/action_about_more" />
+    <item
+        android:id="@+id/action_hack"
+        android:orderInCategory="6"
+        android:title="@string/action_wiki"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_source"
+        android:orderInCategory="7"
+        android:title="@string/action_source"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_licence"
+        android:orderInCategory="8"
+        android:title="@string/action_licence"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_experiments"
+        android:orderInCategory="10"
+        android:title="@string/experiments" />
 </menu>

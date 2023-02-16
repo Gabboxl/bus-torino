@@ -18,8 +18,9 @@
 package it.reyboz.bustorino;
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.ActionBar;
-import it.reyboz.bustorino.fragments.LinesDetailFragment;
+
 import it.reyboz.bustorino.fragments.TestRealtimeGtfsFragment;
 import it.reyboz.bustorino.middleware.GeneralActivity;
 
