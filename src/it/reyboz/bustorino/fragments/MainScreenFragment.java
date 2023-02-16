@@ -136,9 +136,10 @@ public class MainScreenFragment extends ScreenBaseFragment implements  FragmentL
                     try {
                         uri = Uri.parse(result.getContents()); // this apparently prevents NullPointerException. Somehow.
                     } catch (NullPointerException e) {
-                        if (getContext()!=null)
-                        Toast.makeText(getContext().getApplicationContext(),
-                                R.string.no_qrcode, Toast.LENGTH_SHORT).show();
+                        if (getContext()!=null) {
+                            Toast.makeText(getContext().getApplicationContext(),
+                                    R.string.no_qrcode, Toast.LENGTH_SHORT).show();
+                        }
                         return;
                     }
                     String busStopID = getBusStopIDFromUri(uri);
@@ -147,9 +148,10 @@ public class MainScreenFragment extends ScreenBaseFragment implements  FragmentL
 
                 } else {
                     //Toast.makeText(MyActivity.this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-                    if (getContext()!=null)
-                    Toast.makeText(getContext().getApplicationContext(),
-                            R.string.no_qrcode, Toast.LENGTH_SHORT).show();
+                    if (getContext()!=null) {
+                        Toast.makeText(getContext().getApplicationContext(),
+                                R.string.no_qrcode, Toast.LENGTH_SHORT).show();
+                    }
 
 
 
@@ -372,8 +374,9 @@ public class MainScreenFragment extends ScreenBaseFragment implements  FragmentL
         super.onSaveInstanceState(outState);
         Log.d(DEBUG_TAG, "Saving instance state");
         Fragment fragment = getChildFragmentManager().findFragmentById(R.id.resultFrame);
-        if (fragment!=null)
-        getChildFragmentManager().putFragment(outState, SAVED_FRAGMENT, fragment);
+
+        if (fragment!=null) getChildFragmentManager().putFragment(outState, SAVED_FRAGMENT, fragment);
+
         if (fragmentHelper!=null) fragmentHelper.setBlockAllActivities(true);
 
         instanceStateSaved = true;
@@ -444,8 +447,7 @@ public class MainScreenFragment extends ScreenBaseFragment implements  FragmentL
                 else {
                     showNearbyFragmentIfNeeded(cr);
                 }
-            }
-            else{
+            } else{
                 ///TODO: if there is a stop displayed, we need to hold the update
             }
 
@@ -522,7 +524,7 @@ public class MainScreenFragment extends ScreenBaseFragment implements  FragmentL
 
         BarcodeScanOptions scanOptions = new BarcodeScanOptions();
         Intent intent = scanOptions.createScanIntent();
-        if(!BarcodeScanUtils.checkTargetPackageExists(getContext(), intent)){
+        if(!BarcodeScanUtils.checkTargetPackageExists(requireContext(), intent)){
             BarcodeScanUtils.showDownloadDialog(null, this);
         }else {
             barcodeLauncher.launch(scanOptions);
@@ -721,7 +723,6 @@ public class MainScreenFragment extends ScreenBaseFragment implements  FragmentL
                     break;
                 default:
                     Log.d(DEBUG_TAG, "Fragment type is unknown");
-                    return;
             }
         // Shows hints
 
