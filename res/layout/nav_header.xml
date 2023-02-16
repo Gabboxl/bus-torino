@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="bottom"
-    android:minHeight="120dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:padding="16dp">
     <!--
     <ImageView
         android:id="@+id/nav_img"
@@ -17,16 +14,14 @@
         -->
 
     <TextView
-
-        android:layout_width="match_parent"
-
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:text="@string/app_name_full"
-
-        android:textAppearance="@style/ThemeOverlay.AppCompat.Light"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp" />
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:textAppearance="?attr/textAppearanceHeadlineSmall"
+        android:textColor="?attr/colorOnSurface"
+        android:text="@string/app_name_full" />
 
     <!--<TextView
             android:text="@string/app_version"
