@@ -5,7 +5,7 @@
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
 
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppBaseTheme" parent="Theme.Material3.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -25,7 +25,7 @@
 
     </style>
 
-    <style name="Widget.MyApp.Button" parent="Widget.MaterialComponents.Button">
+    <style name="Widget.MyApp.Button" parent="Widget.Material3.Button">
         <item name="backgroundTint">?attr/colorSecondary</item>
     </style>
 
@@ -34,8 +34,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.Material3.Dark"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.Material3.Light"/>
 
 
     <!-- For the preferences Fragment -->
