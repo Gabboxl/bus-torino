@@ -723,7 +723,7 @@ public class ActivityPrincipal extends GeneralActivity implements FragmentListen
             edit=true;
         }
         if (edit){
-            editor.commit();
+            editor.apply();
         }
 
 
