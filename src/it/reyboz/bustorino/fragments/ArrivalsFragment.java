@@ -129,7 +129,7 @@ public class ArrivalsFragment extends ResultListFragment implements LoaderManage
                 return true;
             }
         };
-        prefs = new DBStatusManager(getContext().getApplicationContext(),listener);
+        prefs = new DBStatusManager(requireContext().getApplicationContext(), listener);
         justCreated = true;
 
     }
@@ -182,9 +182,11 @@ public class ArrivalsFragment extends ResultListFragment implements LoaderManage
             }
         });
         String displayName = getArguments().getString(STOP_TITLE);
-        if(displayName!=null)
-        setTextViewMessage(String.format(
-                getString(R.string.passages), displayName));
+
+        if(displayName!=null) {
+            setTextViewMessage(String.format(
+                    getString(R.string.passages), displayName));
+        }
 
 
         String probablemessage = getArguments().getString(MESSAGE_TEXT_VIEW);
@@ -421,12 +423,12 @@ public class ArrivalsFragment extends ResultListFragment implements LoaderManage
         switch (id){
             case loaderFavId:
                 builder.appendPath("favorites").appendPath(stopID);
-                cl = new CursorLoader(getContext(),builder.build(),UserDB.getFavoritesColumnNamesAsArray,null,null,null);
+                cl = new CursorLoader(requireContext(),builder.build(),UserDB.getFavoritesColumnNamesAsArray,null,null,null);
 
                 break;
             case loaderStopId:
                 builder.appendPath("stop").appendPath(stopID);
-                cl = new CursorLoader(getContext(),builder.build(),new String[]{NextGenDB.Contract.StopsTable.COL_NAME},
+                cl = new CursorLoader(requireContext(),builder.build(),new String[]{NextGenDB.Contract.StopsTable.COL_NAME},
                         null,null,null);
                 break;
             default:
@@ -492,8 +494,8 @@ public class ArrivalsFragment extends ResultListFragment implements LoaderManage
         if (stop != null) {
 
             // toggle the status in background
-            new AsyncStopFavoriteAction(getContext().getApplicationContext(), AsyncStopFavoriteAction.Action.TOGGLE,
-                    v->updateStarIconFromLastBusStop(v)).execute(stop);
+            new AsyncStopFavoriteAction(requireContext().getApplicationContext(), AsyncStopFavoriteAction.Action.TOGGLE,
+                    this::updateStarIconFromLastBusStop).execute(stop);
         } else {
             // this case have no sense, but just immediately update the favorite icon
             updateStarIconFromLastBusStop(true);
