@@ -70,7 +70,6 @@ import it.reyboz.bustorino.util.Permissions;
 
 public class MapFragment extends ScreenBaseFragment {
 
-    private static final String TAG = "Busto-MapActivity";
     private static final String MAP_CURRENT_ZOOM_KEY = "map-current-zoom";
     private static final String MAP_CENTER_LAT_KEY = "map-center-lat";
     private static final String MAP_CENTER_LON_KEY = "map-center-lon";

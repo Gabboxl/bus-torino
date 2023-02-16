@@ -18,51 +18,59 @@
 package it.reyboz.bustorino.fragments;
 
 import android.content.Context;
-
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
-import androidx.core.util.Pair;
 import androidx.preference.PreferenceManager;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.work.WorkInfo;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import com.android.volley.NetworkError;
+import com.android.volley.ParseError;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import com.android.volley.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
 import it.reyboz.bustorino.BuildConfig;
 import it.reyboz.bustorino.R;
 import it.reyboz.bustorino.adapters.ArrivalsStopAdapter;
-import it.reyboz.bustorino.backend.*;
-import it.reyboz.bustorino.backend.FiveTAPIFetcher.QueryType;
+import it.reyboz.bustorino.adapters.SquareStopAdapter;
+import it.reyboz.bustorino.backend.NetworkVolleyManager;
+import it.reyboz.bustorino.backend.Palina;
+import it.reyboz.bustorino.backend.Route;
+import it.reyboz.bustorino.backend.Stop;
 import it.reyboz.bustorino.backend.mato.MapiArrivalRequest;
+import it.reyboz.bustorino.backend.utils;
+import it.reyboz.bustorino.data.AppDataProvider;
 import it.reyboz.bustorino.data.DatabaseUpdate;
 import it.reyboz.bustorino.data.NextGenDB;
 import it.reyboz.bustorino.middleware.AppLocationManager;
-import it.reyboz.bustorino.data.AppDataProvider;
-import it.reyboz.bustorino.data.NextGenDB.Contract.*;
-import it.reyboz.bustorino.adapters.SquareStopAdapter;
 import it.reyboz.bustorino.util.LocationCriteria;
 import it.reyboz.bustorino.util.StopSorterByDistance;
-
-import java.util.*;
 
 public class NearbyStopsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -165,19 +173,16 @@ public class NearbyStopsFragment extends Fragment implements LoaderManager.Loade
         switchButton.setOnClickListener(v -> switchFragmentType());
         Log.d(DEBUG_TAG, "onCreateView");
 
-        DatabaseUpdate.watchUpdateWorkStatus(getContext(), this, new Observer<List<WorkInfo>>() {
-            @Override
-            public void onChanged(List<WorkInfo> workInfos) {
-                if(workInfos.isEmpty()) return;
+        DatabaseUpdate.watchUpdateWorkStatus(getContext(), this, workInfos -> {
+            if(workInfos.isEmpty()) return;
 
-                WorkInfo wi = workInfos.get(0);
-                if (wi.getState() == WorkInfo.State.RUNNING && locManager.isRequesterRegistered(fragmentLocationListener)) {
-                    locManager.removeLocationRequestFor(fragmentLocationListener);
-                    dbUpdateRunning = true;
-                } else if(!locManager.isRequesterRegistered(fragmentLocationListener)){
-                    locManager.addLocationRequestFor(fragmentLocationListener);
-                    dbUpdateRunning = false;
-                }
+            WorkInfo wi = workInfos.get(0);
+            if (wi.getState() == WorkInfo.State.RUNNING && locManager.isRequesterRegistered(fragmentLocationListener)) {
+                locManager.removeLocationRequestFor(fragmentLocationListener);
+                dbUpdateRunning = true;
+            } else if(!locManager.isRequesterRegistered(fragmentLocationListener)){
+                locManager.addLocationRequestFor(fragmentLocationListener);
+                dbUpdateRunning = false;
             }
         });
         return root;
@@ -306,7 +311,7 @@ public class NearbyStopsFragment extends Fragment implements LoaderManager.Loade
                 .appendPath(String.valueOf(lastReceivedLocation.getLatitude()))
                 .appendPath(String.valueOf(lastReceivedLocation.getLongitude()))
                 .appendPath(String.valueOf(distance)); //distance
-        CursorLoader cl = new CursorLoader(getContext(),builder.build(),NextGenDB.QUERY_COLUMN_stops_all,null,null,null);
+        CursorLoader cl = new CursorLoader(requireContext(),builder.build(),NextGenDB.QUERY_COLUMN_stops_all,null,null,null);
         cl.setUpdateThrottle(2000);
         return cl;
     }
