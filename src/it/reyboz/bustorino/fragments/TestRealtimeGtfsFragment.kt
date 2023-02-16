@@ -54,7 +54,7 @@ class TestRealtimeGtfsFragment : Fragment() {
 
             context?.let {cont->
                 val req = GtfsRealtimeRequest(GtfsRealtimeRequest.URL_POSITION,
-                    { Toast.makeText(cont, "Error: ${it.message}",Toast.LENGTH_SHORT) },
+                    { Toast.makeText(cont, "Error: ${it.message}",Toast.LENGTH_SHORT).show() },
                     requestListener
                 )
                 NetworkVolleyManager.getInstance(cont).addToRequestQueue(req)
