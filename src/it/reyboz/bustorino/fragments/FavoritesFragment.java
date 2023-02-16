@@ -40,6 +40,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -255,7 +257,7 @@ public class FavoritesFragment extends ScreenBaseFragment {
     }
 
     public void showBusStopUsernameInputDialog(final Stop busStop) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());
 
         LayoutInflater inflater = this.getLayoutInflater();
         View renameDialogLayout = inflater.inflate(R.layout.rename_dialog, null);

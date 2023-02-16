@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
@@ -34,6 +33,10 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * <p>A utility class which helps ease integration with Barcode Scanner via {@link Intent}s. This is a simple
@@ -368,7 +371,7 @@ public class IntentIntegrator {
     }
 
     private AlertDialog showDownloadDialog() {
-        AlertDialog.Builder downloadDialog = new AlertDialog.Builder(activity);
+        MaterialAlertDialogBuilder downloadDialog = new MaterialAlertDialogBuilder(activity);
         downloadDialog.setTitle(title);
         downloadDialog.setMessage(message);
         downloadDialog.setPositiveButton(buttonYes, new DialogInterface.OnClickListener() {

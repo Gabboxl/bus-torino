@@ -1,7 +1,6 @@
 package it.reyboz.bustorino.middleware;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,7 +12,11 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.dialog.MaterialDialogs;
 
 import java.util.List;
 
@@ -31,12 +34,12 @@ public class BarcodeScanUtils {
         return false;
     }
 
-    public static AlertDialog showDownloadDialog(@Nullable Activity activity,@Nullable final Fragment fragment) {
+    public static AlertDialog showDownloadDialog(@Nullable Activity activity, @Nullable final Fragment fragment) {
         if (activity == null){
             if (fragment==null) throw new IllegalArgumentException("Cannot put both activity and fragment null");
             activity = fragment.getActivity();
         }
-        AlertDialog.Builder downloadDialog = new AlertDialog.Builder(activity);
+        MaterialAlertDialogBuilder downloadDialog = new MaterialAlertDialogBuilder(activity);
         downloadDialog.setTitle(R.string.title_barcode_scanner_install);
         downloadDialog.setMessage(R.string.message_install_barcode_scanner);
         final  Activity finalActivity = activity;
