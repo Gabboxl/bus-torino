@@ -35,7 +35,6 @@ import it.reyboz.bustorino.adapters.StopRecyclerAdapter
 import it.reyboz.bustorino.backend.Stop
 import it.reyboz.bustorino.data.gtfs.GtfsRoute
 import it.reyboz.bustorino.data.gtfs.MatoPatternWithStops
-import it.reyboz.bustorino.data.gtfs.PatternStop
 import it.reyboz.bustorino.util.LinesNameSorter
 import it.reyboz.bustorino.util.PatternWithStopsSorter
 

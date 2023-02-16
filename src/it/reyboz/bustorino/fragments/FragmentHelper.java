@@ -182,11 +182,11 @@ public class FragmentHelper {
            // ft.replace(secondaryFrameLayout,fragment,tag);
             frameID = secondaryFrameLayout;
         else frameID = primaryFrameLayout;
-        switch (parameters.transaction){
-            case REPLACE:
-                ft.replace(frameID,fragment,parameters.tag);
 
+        if (parameters.transaction == Transaction.REPLACE) {
+            ft.replace(frameID, fragment, parameters.tag);
         }
+
         if (parameters.addToBackStack)
             ft.addToBackStack("state_"+parameters.tag);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
@@ -252,8 +252,10 @@ public class FragmentHelper {
 
     public void showToastMessage(int messageID, boolean short_lenght) {
         final int length = short_lenght ? Toast.LENGTH_SHORT : Toast.LENGTH_LONG;
-        if (context != null)
-        Toast.makeText(context, messageID, length).show();
+
+        if (context != null) {
+            Toast.makeText(context, messageID, length).show();
+        }
     }
     private void showShortToast(int messageID){
         showToastMessage(messageID, true);

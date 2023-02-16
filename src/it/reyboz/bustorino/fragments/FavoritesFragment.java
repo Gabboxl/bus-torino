@@ -260,7 +260,7 @@ public class FavoritesFragment extends ScreenBaseFragment {
         LayoutInflater inflater = this.getLayoutInflater();
         View renameDialogLayout = inflater.inflate(R.layout.rename_dialog, null);
 
-        busStopNameText = (EditText) renameDialogLayout.findViewById(R.id.rename_dialog_bus_stop_name);
+        busStopNameText = renameDialogLayout.findViewById(R.id.rename_dialog_bus_stop_name);
         busStopNameText.setText(busStop.getStopDisplayName());
         busStopNameText.setHint(busStop.getStopDefaultName());
 
