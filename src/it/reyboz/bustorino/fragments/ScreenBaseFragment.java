@@ -22,7 +22,7 @@ public abstract class ScreenBaseFragment extends Fragment {
         Context mContext = getContext();
         SharedPreferences.Editor editor = mContext.getSharedPreferences(PREF_FILE, MODE_PRIVATE).edit();
         editor.putBoolean(optionName, value);
-        editor.commit();
+        editor.apply();
     }
 
     protected boolean getOption(String optionName, boolean optDefault) {

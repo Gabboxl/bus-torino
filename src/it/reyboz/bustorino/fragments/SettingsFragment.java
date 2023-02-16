@@ -82,17 +82,14 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         Preference dbUpdateNow = findPreference("pref_db_update_now");
         if (dbUpdateNow!=null)
         dbUpdateNow.setOnPreferenceClickListener(
-                new Preference.OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(@NonNull Preference preference) {
-                        //trigger update
-                        if(getContext()!=null) {
-                            DatabaseUpdate.requestDBUpdateWithWork(getContext().getApplicationContext(), true, true);
-                            Toast.makeText(getContext(),R.string.requesting_db_update,Toast.LENGTH_SHORT).show();
-                            return true;
-                        }
-                        return false;
+                preference -> {
+                    //trigger update
+                    if(getContext()!=null) {
+                        DatabaseUpdate.requestDBUpdateWithWork(getContext().getApplicationContext(), true, true);
+                        Toast.makeText(getContext(),R.string.requesting_db_update,Toast.LENGTH_SHORT).show();
+                        return true;
                     }
+                    return false;
                 }
         );
         else {
