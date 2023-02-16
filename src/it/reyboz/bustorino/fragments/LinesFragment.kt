@@ -172,7 +172,7 @@ class LinesFragment : ScreenBaseFragment() {
             //listener
             linesSpinner.onItemSelectedListener = object: OnItemSelectedListener{
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-                    val selRoute = currentRoutes.get(pos)
+                    val selRoute = currentRoutes[pos]
 
                     routeDescriptionTextView.text = selRoute.longName
                     val oldRoute = viewModel.getRouteIDQueried()
@@ -226,7 +226,7 @@ class LinesFragment : ScreenBaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LinesViewModel::class.java)
+        viewModel = ViewModelProvider(this)[LinesViewModel::class.java]
         Log.d(DEBUG_TAG, "Fragment onCreate")
 
     }
@@ -253,7 +253,7 @@ class LinesFragment : ScreenBaseFragment() {
 
     private fun setRoutes(routes: List<GtfsRoute>){
         Log.d(DEBUG_TAG, "Resetting routes")
-        currentRoutes = routes.sortedWith<GtfsRoute>(linesComparator)
+        currentRoutes = routes.sortedWith(linesComparator)
 
         if (linesAdapter!=null){
 
@@ -302,8 +302,8 @@ class LinesFragment : ScreenBaseFragment() {
         var setNewAdapter = true
         if(stopsRecyclerView.adapter is StopRecyclerAdapter){
             val adapter = stopsRecyclerView.adapter as StopRecyclerAdapter
-            if(adapter.stops.size == stopsSorted.size && (adapter.stops.get(0).gtfsID == stopsSorted.get(0).gtfsID)
-                && (adapter.stops.get(numStops-1).gtfsID == stopsSorted.get(numStops-1).gtfsID)
+            if(adapter.stops.size == stopsSorted.size && (adapter.stops[0].gtfsID == stopsSorted.get(0).gtfsID)
+                && (adapter.stops[numStops-1].gtfsID == stopsSorted[numStops-1].gtfsID)
             ){
                 Log.d(DEBUG_TAG, "Found same stops on recyclerview")
                 setNewAdapter = false
@@ -351,9 +351,9 @@ class LinesFragment : ScreenBaseFragment() {
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
 
-        if (stopsRecyclerView.getAdapter() !is StopRecyclerAdapter) return false
+        if (stopsRecyclerView.adapter !is StopRecyclerAdapter) return false
         val adapter =stopsRecyclerView.adapter as StopRecyclerAdapter
-        val stop = adapter.stops.get(adapter.getPosition())
+        val stop = adapter.stops[adapter.position]
 
         val acId = item.itemId
         if(acId == R.id.action_view_on_map){

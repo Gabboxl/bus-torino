@@ -58,7 +58,7 @@ class LinesViewModel(application: Application) : AndroidViewModel(application) {
      * Find the
      */
     private fun requestStopsForGTFSIDs(gtfsIDs: List<String>){
-        if (gtfsIDs.equals(lastShownPatternStops)){
+        if (gtfsIDs == lastShownPatternStops){
             //nothing to do
             return
         }
