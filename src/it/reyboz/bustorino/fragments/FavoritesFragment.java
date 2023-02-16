@@ -193,11 +193,11 @@ public class FavoritesFragment extends ScreenBaseFragment {
 
         switch (item.getItemId()) {
             case R.id.action_favourite_entry_delete:
-                if (getContext()!=null)
-                new AsyncStopFavoriteAction(getContext().getApplicationContext(), AsyncStopFavoriteAction.Action.REMOVE,
-                        result -> {
-
-                        }).execute(busStop);
+                if (getContext()!=null) {
+                    new AsyncStopFavoriteAction(getContext().getApplicationContext(), AsyncStopFavoriteAction.Action.REMOVE,
+                            result -> {
+                            }).execute(busStop);
+                }
 
                 return true;
 
