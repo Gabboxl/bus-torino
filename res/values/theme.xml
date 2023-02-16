@@ -19,7 +19,7 @@
         <item name="colorAccent">@color/teal_500</item>
     </style>
 
-    <style name="preferenceTheme" parent="PreferenceThemeOverlay"></style>
+    <style name="preferenceTheme" parent="ThemeOverlay.Material3.Light" />
 
 
 
