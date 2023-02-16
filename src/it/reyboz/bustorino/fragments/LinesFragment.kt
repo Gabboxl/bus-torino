@@ -70,7 +70,6 @@ class LinesFragment : ScreenBaseFragment() {
     private val linesComparator = Comparator<GtfsRoute> { a,b ->
         return@Comparator linesNameSorter.compare(a.shortName, b.shortName)
     }
-    private var firstClick = true
     private var recyclerViewState:Parcelable? = null
     private var patternsSpinnerState:Parcelable? = null
 
