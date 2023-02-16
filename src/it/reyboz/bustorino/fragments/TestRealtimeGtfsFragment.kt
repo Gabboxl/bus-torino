@@ -14,16 +14,7 @@ import it.reyboz.bustorino.R
 import it.reyboz.bustorino.backend.NetworkVolleyManager
 import it.reyboz.bustorino.backend.gtfs.GtfsRealtimeRequest
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TestRealtimeGtfsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TestRealtimeGtfsFragment : Fragment() {
 
     private lateinit var buttonLaunch: Button
@@ -63,7 +54,7 @@ class TestRealtimeGtfsFragment : Fragment() {
 
             context?.let {cont->
                 val req = GtfsRealtimeRequest(GtfsRealtimeRequest.URL_POSITION,
-                    Response.ErrorListener { Toast.makeText(cont, "Error: ${it.message}",Toast.LENGTH_SHORT) },
+                    { Toast.makeText(cont, "Error: ${it.message}",Toast.LENGTH_SHORT) },
                     requestListener
                 )
                 NetworkVolleyManager.getInstance(cont).addToRequestQueue(req)
