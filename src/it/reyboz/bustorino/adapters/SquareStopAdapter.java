@@ -101,10 +101,10 @@ public class SquareStopAdapter extends RecyclerView.Adapter<SquareStopAdapter.Sq
         SquareViewHolder(View holdView){
             super(holdView);
             holdView.setOnClickListener(this);
-            stopIDView = (TextView) holdView.findViewById(R.id.stop_numberText);
-            stopNameView = (TextView) holdView.findViewById(R.id.stop_nameText);
-            routesView = (TextView) holdView.findViewById(R.id.stop_linesText);
-            distancetextView = (TextView) holdView.findViewById(R.id.stop_distanceTextView);
+            stopIDView = holdView.findViewById(R.id.stop_numberText);
+            stopNameView = holdView.findViewById(R.id.stop_nameText);
+            routesView = holdView.findViewById(R.id.stop_linesText);
+            distancetextView = holdView.findViewById(R.id.stop_distanceTextView);
         }
 
         @Override
