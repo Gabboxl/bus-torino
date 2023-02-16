@@ -77,8 +77,7 @@ public class CommonScrollListener extends RecyclerView.OnScrollListener implemen
     @Override
     public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
         FragmentListenerMain listener = listenerWeakReference.get();
-        if(newState!=SCROLL_STATE_IDLE) listener.showFloatingActionButton(false);
-        else listener.showFloatingActionButton(true);
 
+        listener.showFloatingActionButton(newState == SCROLL_STATE_IDLE);
     }
 }
