@@ -146,14 +146,11 @@ android {
         implementation 'junit:junit:4.13.2'
 
         implementation "androidx.test.ext:junit:1.1.5"
-        implementation "androidx.test:core:1.5.0"
         implementation "androidx.test:runner:$androidXTestVersion"
         implementation "androidx.room:room-testing:2.5.0"
 
         androidTestImplementation "androidx.test.ext:junit:1.1.5"
-        androidTestImplementation "androidx.test:core:$androidXTestVersion"
         androidTestImplementation "androidx.test:runner:$androidXTestVersion"
-        androidTestImplementation "androidx.test:rules:$androidXTestVersion"
         androidTestImplementation "androidx.room:room-testing:2.5.0"
 
 
