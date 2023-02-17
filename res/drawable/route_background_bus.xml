@@ -8,7 +8,7 @@
         android:color="#1a237e" /
     -->
 
-    <solid android:color="@color/material_dynamic_primary40" />
+    <solid android:color="#ff9800" />
 
     <corners android:radius="100dp" />
 
